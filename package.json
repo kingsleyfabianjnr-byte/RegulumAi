@@ -1,0 +1,21 @@
+{
+  "name": "regulum-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RegTech AI SaaS platform for compliance monitoring",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "npm --workspace=client run dev",
+    "dev:server": "npm --workspace=server run dev",
+    "build": "npm --workspace=client run build && npm --workspace=server run build",
+    "build:client": "npm --workspace=client run build",
+    "build:server": "npm --workspace=server run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
