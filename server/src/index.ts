@@ -27,6 +27,12 @@ app.get("/", (_req, res) => {
   res.sendFile(path.join(publicDir, "index.html"));
 });
 
+// RegulumAI dashboard (static HTML with Tailwind)
+app.get("/dashboard", (_req, res) => {
+  const dashboardPath = path.join(__dirname, "..", "..", "client", "dashboard.html");
+  res.sendFile(dashboardPath);
+});
+
 // Health check
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
