@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import SessionProvider from "@/components/auth/SessionProvider";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "RegulumAi - AI-Powered Compliance Monitoring",
@@ -15,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-gray-50 text-gray-900 antialiased">
+      <body className={`${inter.className} min-h-screen bg-slate-50 text-gray-900 antialiased`}>
         <SessionProvider>{children}</SessionProvider>
       </body>
     </html>

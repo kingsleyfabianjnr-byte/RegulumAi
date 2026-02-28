@@ -81,15 +81,15 @@ export default function CompliancePage() {
 
   const statusColors: Record<string, string> = {
     PENDING: "bg-gray-100 text-gray-700",
-    IN_PROGRESS: "bg-yellow-100 text-yellow-700",
-    COMPLIANT: "bg-green-100 text-green-700",
+    IN_PROGRESS: "bg-amber-100 text-amber-700",
+    COMPLIANT: "bg-emerald-100 text-emerald-700",
     NON_COMPLIANT: "bg-red-100 text-red-700",
     NEEDS_REVIEW: "bg-orange-100 text-orange-700",
   };
 
   const riskColors: Record<string, string> = {
-    LOW: "text-green-600",
-    MEDIUM: "text-yellow-600",
+    LOW: "text-emerald-600",
+    MEDIUM: "text-amber-600",
     HIGH: "text-orange-600",
     CRITICAL: "text-red-600",
   };
@@ -101,7 +101,7 @@ export default function CompliancePage() {
       </h1>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-600">
+        <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
           {error}
         </div>
       )}
@@ -113,7 +113,7 @@ export default function CompliancePage() {
         </h2>
         <form onSubmit={handleCreate} className="space-y-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1.5 block text-sm font-medium text-gray-700">
               Title
             </label>
             <input
@@ -122,11 +122,11 @@ export default function CompliancePage() {
               onChange={(e) => setTitle(e.target.value)}
               required
               placeholder="e.g., Q1 2025 KYC Policy Review"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+              className="w-full rounded-lg border border-gray-300 bg-gray-50/50 px-3.5 py-2.5 text-sm transition-colors focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-gray-700">
+            <label className="mb-1.5 block text-sm font-medium text-gray-700">
               Document Text
             </label>
             <textarea
@@ -134,13 +134,13 @@ export default function CompliancePage() {
               onChange={(e) => setDocumentText(e.target.value)}
               rows={6}
               placeholder="Paste the document or policy text to analyze..."
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+              className="w-full rounded-lg border border-gray-300 bg-gray-50/50 px-3.5 py-2.5 text-sm transition-colors focus:border-primary-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-primary-500/20"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-primary-600 px-6 py-2 text-sm font-semibold text-white hover:bg-primary-700 disabled:opacity-50"
+            className="rounded-lg bg-primary-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-primary-700 hover:shadow-md disabled:opacity-50"
           >
             {loading ? "Creating..." : "Create Check"}
           </button>
@@ -180,7 +180,7 @@ export default function CompliancePage() {
                     )}
                   </div>
                   {check.aiAnalysis && (
-                    <p className="mt-2 text-sm text-gray-600">
+                    <p className="mt-3 text-sm leading-relaxed text-gray-600">
                       {check.aiAnalysis}
                     </p>
                   )}
@@ -189,7 +189,7 @@ export default function CompliancePage() {
                   <button
                     onClick={() => handleAnalyze(check.id)}
                     disabled={analyzing === check.id}
-                    className="rounded-lg border border-primary-300 px-4 py-1.5 text-sm font-medium text-primary-700 hover:bg-primary-50 disabled:opacity-50"
+                    className="rounded-lg border border-primary-200 bg-primary-50 px-4 py-1.5 text-sm font-medium text-primary-700 transition-colors hover:bg-primary-100 disabled:opacity-50"
                   >
                     {analyzing === check.id ? "Analyzing..." : "Run AI Analysis"}
                   </button>
