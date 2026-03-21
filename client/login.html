@@ -62,7 +62,12 @@
               role="alert"
             ></p>
 
-            <form id="login-form" class="space-y-5">
+            <form
+              id="login-form"
+              method="post"
+              action="/api/auth/login"
+              class="space-y-5"
+            >
               <div>
                 <label for="email" class="block text-sm font-medium text-slate-300"
                   >Email</label
@@ -104,46 +109,21 @@
       </main>
     </div>
     <script>
-      const form = document.getElementById("login-form");
-      const errEl = document.getElementById("form-error");
-      const btn = document.getElementById("submit-btn");
-
-      function showError(msg) {
-        errEl.textContent = msg;
-        errEl.classList.remove("hidden");
-      }
-      function hideError() {
-        errEl.classList.add("hidden");
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        hideError();
-        btn.disabled = true;
-        const fd = new FormData(form);
-        const body = {
-          email: fd.get("email")?.toString().trim(),
-          password: fd.get("password")?.toString() ?? "",
-        };
-        try {
-          const res = await fetch("/api/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(body),
-          });
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok) {
-            showError(data.error || "Invalid credentials");
-            return;
-          }
-          window.location.href = data.redirect || "/dashboard";
-        } catch {
-          showError("Network error. Try again.");
-        } finally {
-          btn.disabled = false;
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var err = params.get("error");
+        var notice = params.get("notice");
+        var errEl = document.getElementById("form-error");
+        var nEl = document.getElementById("form-notice");
+        if (err && errEl) {
+          errEl.textContent = err;
+          errEl.classList.remove("hidden");
         }
-      });
+        if (notice && nEl) {
+          nEl.textContent = notice;
+          nEl.classList.remove("hidden");
+        }
+      })();
     </script>
   </body>
 </html>

@@ -17,37 +17,36 @@ app.use(
   })
 );
 app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
 
 // Serve static assets (landing page, etc.)
-const publicDir = path.join(__dirname, "..", "public");
-app.use(express.static(publicDir));
+const publicDir = path.resolve(__dirname, "..", "public");
+const clientDir = path.resolve(__dirname, "..", "..", "client");
 
 // Landing page
 app.get("/", (_req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
+  res.sendFile(path.resolve(clientDir, "index.html"));
 });
 
 // RegulumAI dashboard (static HTML with Tailwind)
 app.get("/dashboard", (_req, res) => {
-  const dashboardPath = path.join(__dirname, "..", "..", "client", "dashboard.html");
-  res.sendFile(dashboardPath);
+  res.sendFile(path.resolve(clientDir, "dashboard.html"));
 });
 
 // Marketing landing page (client/index.html)
 app.get("/create-rule", (_req, res) => {
-  const landingPath = path.join(__dirname, "..", "..", "client", "index.html");
-  res.sendFile(landingPath);
+  res.sendFile(path.resolve(clientDir, "index.html"));
 });
 
-const clientDir = path.join(__dirname, "..", "..", "client");
-
 app.get("/signup", (_req, res) => {
-  res.sendFile(path.join(clientDir, "signup.html"));
+  res.sendFile(path.resolve(clientDir, "signup.html"));
 });
 
 app.get("/login", (_req, res) => {
-  res.sendFile(path.join(clientDir, "login.html"));
+  res.sendFile(path.resolve(clientDir, "login.html"));
 });
+
+app.use(express.static(publicDir));
 
 // Health check
 app.get("/api/health", (_req, res) => {

@@ -26,7 +26,7 @@ router.get("/", async (req: AuthRequest, res: Response) => {
 router.get("/:id", async (req: AuthRequest, res: Response) => {
   try {
     const check = await prisma.complianceCheck.findFirst({
-      where: { id: req.params.id, userId: req.userId },
+      where: { id: req.params.id as string, userId: req.userId },
     });
 
     if (!check) {
@@ -80,7 +80,7 @@ router.post("/", async (req: AuthRequest, res: Response) => {
 router.post("/:id/analyze", async (req: AuthRequest, res: Response) => {
   try {
     const check = await prisma.complianceCheck.findFirst({
-      where: { id: req.params.id, userId: req.userId },
+      where: { id: req.params.id as string, userId: req.userId },
     });
 
     if (!check) {
@@ -152,7 +152,7 @@ router.post("/:id/analyze", async (req: AuthRequest, res: Response) => {
 router.delete("/:id", async (req: AuthRequest, res: Response) => {
   try {
     const check = await prisma.complianceCheck.findFirst({
-      where: { id: req.params.id, userId: req.userId },
+      where: { id: req.params.id as string, userId: req.userId },
     });
 
     if (!check) {

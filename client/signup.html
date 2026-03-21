@@ -61,16 +61,15 @@
               class="mb-4 hidden rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300"
               role="alert"
             ></p>
-            <p
-              id="form-success"
-              class="mb-4 hidden rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200"
-              role="status"
-            ></p>
-
-            <form id="signup-form" class="space-y-5">
+            <form
+              id="signup-form"
+              method="post"
+              action="/api/auth/signup"
+              class="space-y-5"
+            >
               <div>
                 <label for="company" class="block text-sm font-medium text-slate-300"
-                  >Company name</label
+                  >Company</label
                 >
                 <input
                   id="company"
@@ -124,59 +123,15 @@
       </main>
     </div>
     <script>
-      const form = document.getElementById("signup-form");
-      const errEl = document.getElementById("form-error");
-      const okEl = document.getElementById("form-success");
-      const btn = document.getElementById("submit-btn");
-
-      function showError(msg) {
-        okEl.classList.add("hidden");
-        errEl.textContent = msg;
-        errEl.classList.remove("hidden");
-      }
-      function showSuccess(msg) {
-        errEl.classList.add("hidden");
-        okEl.textContent = msg;
-        okEl.classList.remove("hidden");
-      }
-      function hideMessages() {
-        errEl.classList.add("hidden");
-        okEl.classList.add("hidden");
-      }
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        hideMessages();
-        btn.disabled = true;
-        const fd = new FormData(form);
-        const body = {
-          companyName: fd.get("companyName")?.toString().trim(),
-          email: fd.get("email")?.toString().trim(),
-          password: fd.get("password")?.toString() ?? "",
-        };
-        try {
-          const res = await fetch("/api/auth/signup", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify(body),
-          });
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok) {
-            showError(data.error || "Something went wrong");
-            return;
-          }
-          if (data.message) showSuccess(data.message);
-          const dest = data.redirect || "/dashboard";
-          setTimeout(() => {
-            window.location.href = dest;
-          }, data.message ? 1800 : 0);
-        } catch {
-          showError("Network error. Try again.");
-        } finally {
-          btn.disabled = false;
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var err = params.get("error");
+        var errEl = document.getElementById("form-error");
+        if (err && errEl) {
+          errEl.textContent = err;
+          errEl.classList.remove("hidden");
         }
-      });
+      })();
     </script>
   </body>
 </html>

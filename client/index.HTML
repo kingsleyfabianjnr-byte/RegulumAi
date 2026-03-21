@@ -1,448 +1,874 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="RegulumAI — AI-powered compliance monitoring for modern regulatory teams."
-    />
-    <title>RegulumAI — Compliance OS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              accent: "#00d9ff",
-            },
-            fontFamily: {
-              sans: ["ui-sans-serif", "system-ui", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
-  </head>
-  <body
-    class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-accent/30 selection:text-white"
-  >
-    <div
-      class="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(0,217,255,0.15),transparent)]"
-    ></div>
-    <div
-      class="fixed inset-0 -z-10 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900"
-    ></div>
-
-    <!-- Nav -->
-    <header
-      class="sticky top-0 z-50 border-b border-slate-800/70 bg-slate-950/80 backdrop-blur-xl"
-    >
-      <div
-        class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6"
-      >
-        <a href="#top" class="flex items-center gap-3">
-          <div
-            class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 shadow-[0_0_30px_rgba(0,217,255,0.35)]"
-          >
-            <span class="text-lg font-semibold text-accent">R</span>
-          </div>
-          <div>
-            <p class="text-sm font-semibold tracking-wide">RegulumAI</p>
-            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
-              Compliance OS
-            </p>
-          </div>
-        </a>
-        <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-          <a href="#stats" class="transition hover:text-accent">Stats</a>
-          <a href="#features" class="transition hover:text-accent">Features</a>
-          <a href="#pricing" class="transition hover:text-accent">Pricing</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RegulumAI - Regulatory Intelligence That Thinks Ahead</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-darker: #050810;
+            --accent-cyan: #00d9ff;
+            --accent-electric: #7c3aed;
+            --accent-pink: #ff006e;
+            --text-light: #e8edf5;
+            --text-muted: #8b92a8;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* Animated background grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: grid-flow 20s linear infinite;
+            z-index: 0;
+        }
+        
+        @keyframes grid-flow {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+        
+        /* Glowing orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+        
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-cyan);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-electric);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: 5s;
+        }
+        
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: var(--accent-pink);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cta-nav {
+            padding: 0.75rem 1.5rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 8px;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .cta-nav:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 8rem;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out 0.3s backwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(124, 58, 237, 0.2);
+            border: 1px solid var(--accent-electric);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px rgba(0, 217, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: 2px solid rgba(232, 237, 245, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(232, 237, 245, 0.05);
+            border-color: var(--accent-cyan);
+        }
+        
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0 8rem;
+            animation: fadeIn 1.5s ease-out 0.6s backwards;
+        }
+        
+        .stat-card {
+            padding: 2rem;
+            background: rgba(232, 237, 245, 0.03);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            background: rgba(232, 237, 245, 0.05);
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        /* Features Section */
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 8rem;
+        }
+        
+        .feature-card {
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.4s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 60px rgba(0, 217, 255, 0.2);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        /* Pain Points Section */
+        .pain-points {
+            padding: 6rem 0;
+            background: rgba(232, 237, 245, 0.02);
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+            margin: 4rem 0;
+        }
+        
+        .pain-list {
+            display: grid;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pain-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding: 2rem;
+            background: rgba(255, 0, 110, 0.05);
+            border-left: 4px solid var(--accent-pink);
+            border-radius: 12px;
+        }
+        
+        .pain-icon {
+            font-size: 2rem;
+            min-width: 50px;
+        }
+        
+        .pain-content h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pain-content p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            margin: 8rem 0;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .pricing-card {
+            padding: 3rem 2.5rem;
+            background: rgba(232, 237, 245, 0.03);
+            border: 2px solid rgba(0, 217, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        .pricing-card.popular {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border-color: var(--accent-cyan);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        .pricing-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card .price {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            margin: 1rem 0;
+        }
+        
+        .pricing-card .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(232, 237, 245, 0.1);
+            color: var(--text-muted);
+        }
+        
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-cyan);
+            font-weight: 700;
+            margin-right: 0.75rem;
+        }
+        
+        .pricing-cta {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .pricing-cta:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+        
+        .pricing-card.popular .pricing-cta {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-electric));
+            color: white;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(0, 217, 255, 0.1);
+            margin-top: 8rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h4 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent-cyan);
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(232, 237, 245, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 3rem 0 4rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background effects -->
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">RegulumAI</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#demo" class="cta-nav">Request Demo</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <a
-            href="/dashboard"
-            class="hidden rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-accent/50 hover:text-accent sm:inline-flex"
-            >Dashboard</a
-          >
-          <a
-            href="#pricing"
-            class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(0,217,255,0.35)] transition hover:bg-cyan-300"
-            >Get started</a
-          >
-        </div>
-      </div>
-    </header>
-
-    <main id="top">
-      <!-- Hero -->
-      <section
-        class="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24"
-      >
-        <div class="mx-auto max-w-3xl text-center">
-          <p
-            class="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-accent"
-          >
-            <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
-            RegTech for regulated industries
-          </p>
-          <h1
-            class="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
-          >
-            Compliance monitoring,
-            <span class="bg-gradient-to-r from-accent to-cyan-300 bg-clip-text text-transparent"
-              >powered by AI</span
-            >
-          </h1>
-          <p
-            class="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-slate-400"
-          >
-            Surface regulatory change, automate evidence trails, and keep teams
-            aligned—without drowning in PDFs and spreadsheets.
-          </p>
-          <div
-            class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <a
-              href="#pricing"
-              class="inline-flex w-full items-center justify-center rounded-xl bg-accent px-8 py-3.5 text-base font-semibold text-slate-950 shadow-[0_0_32px_rgba(0,217,255,0.4)] transition hover:bg-cyan-300 sm:w-auto"
-              >Start free trial</a
-            >
-            <a
-              href="#features"
-              class="inline-flex w-full items-center justify-center rounded-xl border border-slate-600 bg-slate-900/50 px-8 py-3.5 text-base font-medium text-slate-200 backdrop-blur transition hover:border-accent/40 hover:text-accent sm:w-auto"
-              >See how it works</a
-            >
-          </div>
-        </div>
-
-        <!-- Hero visual -->
-        <div
-          class="relative mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/40 p-1 shadow-2xl shadow-accent/5"
-        >
-          <div
-            class="rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 p-6 sm:p-10"
-          >
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-6">
-              <div class="flex items-center gap-3">
-                <div class="h-3 w-3 rounded-full bg-red-500/80"></div>
-                <div class="h-3 w-3 rounded-full bg-amber-500/80"></div>
-                <div class="h-3 w-3 rounded-full bg-emerald-500/80"></div>
-                <span class="ml-2 font-mono text-xs text-slate-500"
-                  >regulum.ai/compliance</span
-                >
-              </div>
-              <span
-                class="rounded-md bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-400"
-                >All systems operational</span
-              >
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">🚀 Now Tracking 2025 ICH E6(R3) Updates</div>
+            <h1>
+                <span class="gradient-text">Regulatory Intelligence</span><br>
+                That Thinks Ahead
+            </h1>
+            <p>
+                Stop drowning in regulatory updates. RegulumAI automatically monitors 50+ global sources, 
+                interprets changes in plain language, and tells you exactly what to do—before your trials are at risk.
+            </p>
+            <div class="cta-buttons">
+                <a href="#demo" class="btn-primary">Start Free Trial</a>
+                <a href="#video" class="btn-secondary">Watch Demo</a>
             </div>
-            <div class="mt-6 grid gap-4 sm:grid-cols-3">
-              <div
-                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
-              >
-                <p class="text-xs uppercase tracking-wider text-slate-500">
-                  Monitored sources
+        </section>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">60%</div>
+                <div class="stat-label">Less time monitoring regulations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Regulatory sources tracked 24/7</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$2M</div>
+                <div class="stat-label">Average cost of regulatory delays</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24hr</div>
+                <div class="stat-label">Alert speed for critical updates</div>
+            </div>
+        </div>
+        
+        <!-- Pain Points -->
+        <section class="pain-points">
+            <div class="container">
+                <h2 class="section-title">The Regulatory Chaos Facing Clinical-Stage Biotech</h2>
+                <p class="section-subtitle">
+                    2025 has brought unprecedented regulatory changes. Are you keeping up?
                 </p>
-                <p class="mt-2 text-2xl font-semibold text-white">2,400+</p>
-              </div>
-              <div
-                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
-              >
-                <p class="text-xs uppercase tracking-wider text-slate-500">
-                  New signals (24h)
-                </p>
-                <p class="mt-2 text-2xl font-semibold text-accent">47</p>
-              </div>
-              <div
-                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
-              >
-                <p class="text-xs uppercase tracking-wider text-slate-500">
-                  Avg. review time
-                </p>
-                <p class="mt-2 text-2xl font-semibold text-white">−62%</p>
-              </div>
+                
+                <div class="pain-list">
+                    <div class="pain-item">
+                        <div class="pain-icon">⚠️</div>
+                        <div class="pain-content">
+                            <h3>Regulatory Overload</h3>
+                            <p>
+                                ICH E6(R3), EU CTIS, FDA DCT guidance, CSA requirements, BIOSECURE Act—
+                                your team is manually tracking hundreds of sources across FDA, EMA, MHRA, and more. 
+                                <strong>One missed update = trial delays costing $600K-$8M per month.</strong>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="pain-item">
+                        <div class="pain-icon">🌍</div>
+                        <div class="pain-content">
+                            <h3>Multi-Jurisdictional Nightmare</h3>
+                            <p>
+                                EU trials take 113 days for approval vs. 60 in US/China. Different requirements for CTIS, 
+                                EMA, FDA, country-specific rules—your 2-person regulatory team is overwhelmed managing global complexity.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="pain-item">
+                        <div class="pain-icon">📊</div>
+                        <div class="pain-content">
+                            <h3>No Time for Strategy</h3>
+                            <p>
+                                Your regulatory affairs team spends 40-60% of their time just tracking changes—
+                                leaving no bandwidth for strategic planning, investor communications, or actual compliance work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div
-              class="mt-4 rounded-lg border border-dashed border-slate-700/80 bg-slate-900/30 p-4 font-mono text-xs leading-relaxed text-slate-400"
-            >
-              <span class="text-accent">→</span> EU AI Act · Annex flagged ·
-              Policy draft ready for legal review
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Stats -->
-      <section id="stats" class="border-y border-slate-800/80 bg-slate-900/30">
-        <div
-          class="mx-auto grid max-w-6xl grid-cols-2 gap-px border-slate-800/80 bg-slate-800/50 md:grid-cols-4"
-        >
-          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
-            <p class="text-3xl font-semibold text-white sm:text-4xl">99.9%</p>
-            <p class="mt-2 text-sm text-slate-400">Platform uptime</p>
-          </div>
-          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
-            <p class="text-3xl font-semibold text-accent sm:text-4xl">&lt;200ms</p>
-            <p class="mt-2 text-sm text-slate-400">API p95 latency</p>
-          </div>
-          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
-            <p class="text-3xl font-semibold text-white sm:text-4xl">50+</p>
-            <p class="mt-2 text-sm text-slate-400">Jurisdictions</p>
-          </div>
-          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
-            <p class="text-3xl font-semibold text-white sm:text-4xl">4.9</p>
-            <p class="mt-2 text-sm text-slate-400">G2 satisfaction</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Features -->
-      <section id="features" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div class="mx-auto max-w-2xl text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Everything your compliance program needs
-          </h2>
-          <p class="mt-4 text-slate-400">
-            From horizon scanning to audit-ready exports—one place for policy,
-            evidence, and accountability.
-          </p>
-        </div>
-        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-white">Regulatory radar</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Continuous monitoring of agencies, registers, and feeds—ranked by
-              relevance to your entity profile.
+        </section>
+        
+        <!-- Features -->
+        <section id="features">
+            <h2 class="section-title">One Platform. Zero Surprises.</h2>
+            <p class="section-subtitle">
+                AI-powered regulatory intelligence purpose-built for clinical-stage biotech
             </p>
-          </article>
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Monitoring</h3>
+                    <p>
+                        Automated 24/7 tracking of FDA, EMA, ICH, MHRA, and 50+ regulatory sources. 
+                        AI detects changes, filters noise, and delivers only what matters to your trials.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Plain-Language Interpretation</h3>
+                    <p>
+                        No more decoding regulatory jargon. Our AI translates complex guidance into 
+                        3 sections: What Changed, Impact on You, and Action Items with deadlines.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Trial-Specific Alerts</h3>
+                    <p>
+                        Create your trial profile once. Get alerts filtered by phase (I/II/III), 
+                        therapeutic area, jurisdiction, and role—only what impacts your work.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Compliance Dashboard</h3>
+                    <p>
+                        See all active regulations, upcoming deadlines, gap analysis vs. your SOPs, 
+                        and audit-ready reports—all in one beautiful dashboard.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Intelligent Search</h3>
+                    <p>
+                        Full-text semantic search across all tracked regulations. Find answers instantly 
+                        with AI-powered search that understands regulatory context.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>API & Integrations</h3>
+                    <p>
+                        Connect with Veeva Vault, MasterControl, Slack, email, and more. 
+                        Embed regulatory intelligence directly into your existing workflows.
+                    </p>
+                </div>
             </div>
-            <h3 class="text-lg font-semibold text-white">Policy alignment</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Map obligations to internal controls; surface gaps before auditors
-              or regulators do.
+        </section>
+        
+        <!-- Pricing -->
+        <section id="pricing" class="pricing">
+            <h2 class="section-title">Pricing Built for Biotech Reality</h2>
+            <p class="section-subtitle">
+                No enterprise bloat. Just fair pricing that scales with your trials.
             </p>
-          </article>
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4-8-4s-8 1.79-8 4" />
-              </svg>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$499<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>1-2 active trials</li>
+                        <li>Single therapeutic area</li>
+                        <li>Email alerts</li>
+                        <li>1 user seat</li>
+                        <li>Standard support</li>
+                    </ul>
+                    <button class="pricing-cta">Start Free Trial</button>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="pricing-badge">MOST POPULAR</div>
+                    <h3>Growth</h3>
+                    <div class="price">$1,499<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 5 active trials</li>
+                        <li>Multi-therapeutic area</li>
+                        <li>Dashboard + email/Slack alerts</li>
+                        <li>5 user seats</li>
+                        <li>API access</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="pricing-cta">Start Free Trial</button>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$3,999<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited trials</li>
+                        <li>White-label compliance reports</li>
+                        <li>Custom regulatory sources</li>
+                        <li>15 user seats</li>
+                        <li>Full API access</li>
+                        <li>Dedicated account manager</li>
+                        <li>Annual regulatory audit</li>
+                    </ul>
+                    <button class="pricing-cta">Contact Sales</button>
+                </div>
             </div>
-            <h3 class="text-lg font-semibold text-white">Evidence vault</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Immutable trails, versioned documents, and export packages tailored
-              to SOC 2 and ISO workflows.
-            </p>
-          </article>
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>RegulumAI</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;">
+                        Regulatory intelligence that thinks ahead. 
+                        Purpose-built for clinical-stage biotech companies navigating the global compliance landscape.
+                    </p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#integrations">Integrations</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#guides">Regulatory Guides</a></li>
+                        <li><a href="#webinars">Webinars</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
             </div>
-            <h3 class="text-lg font-semibold text-white">Workflow automation</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Route attestations, reminders, and escalations with SLAs that match
-              your risk appetite.
-            </p>
-          </article>
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 RegulumAI. All rights reserved. | Built for clinical-stage biotech teams navigating regulatory complexity.</p>
             </div>
-            <h3 class="text-lg font-semibold text-white">Role-based access</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Fine-grained permissions for legal, risk, engineering, and external
-              counsel—without shadow IT.
-            </p>
-          </article>
-          <article
-            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
-          >
-            <div
-              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
-            >
-              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-white">Developer-first API</h3>
-            <p class="mt-2 text-sm leading-relaxed text-slate-400">
-              Webhooks, structured payloads, and sandbox keys so you can embed
-              compliance into your stack.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- Pricing -->
-      <section id="pricing" class="border-t border-slate-800/80 bg-slate-900/20">
-        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div class="mx-auto max-w-2xl text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Simple, transparent pricing
-            </h2>
-            <p class="mt-4 text-slate-400">
-              Start small, scale with your footprint. Annual billing saves 20%.
-            </p>
-          </div>
-          <div class="mt-14 grid gap-8 lg:grid-cols-3">
-            <div
-              class="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/50 p-8"
-            >
-              <h3 class="text-lg font-semibold text-white">Starter</h3>
-              <p class="mt-2 text-sm text-slate-400">
-                For teams validating AI-driven compliance workflows.
-              </p>
-              <p class="mt-6 flex items-baseline gap-1">
-                <span class="text-4xl font-semibold text-white">$99</span>
-                <span class="text-slate-500">/mo</span>
-              </p>
-              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Up to 3 users
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> 1 jurisdiction pack
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Weekly digest
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Email support
-                </li>
-              </ul>
-              <a
-                href="#top"
-                class="mt-8 block rounded-xl border border-slate-600 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent"
-                >Contact sales</a
-              >
-            </div>
-            <div
-              class="relative flex flex-col rounded-2xl border border-accent/40 bg-slate-900/60 p-8 shadow-[0_0_48px_rgba(0,217,255,0.12)]"
-            >
-              <span
-                class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs font-semibold text-slate-950"
-                >Most popular</span
-              >
-              <h3 class="text-lg font-semibold text-white">Growth</h3>
-              <p class="mt-2 text-sm text-slate-400">
-                For scaling programs across business units and regions.
-              </p>
-              <p class="mt-6 flex items-baseline gap-1">
-                <span class="text-4xl font-semibold text-white">$499</span>
-                <span class="text-slate-500">/mo</span>
-              </p>
-              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Up to 25 users
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> All jurisdiction packs
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Real-time alerts & API
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> SSO (SAML)
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Priority support
-                </li>
-              </ul>
-              <a
-                href="#top"
-                class="mt-8 block rounded-xl bg-accent py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-                >Start trial</a
-              >
-            </div>
-            <div
-              class="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/50 p-8"
-            >
-              <h3 class="text-lg font-semibold text-white">Enterprise</h3>
-              <p class="mt-2 text-sm text-slate-400">
-                Global banks, insurers, and platforms with complex estates.
-              </p>
-              <p class="mt-6 flex items-baseline gap-1">
-                <span class="text-4xl font-semibold text-white">Custom</span>
-              </p>
-              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Unlimited seats
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Dedicated CSM
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> VPC / on-prem options
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> Custom integrations
-                </li>
-                <li class="flex gap-2">
-                  <span class="text-accent">✓</span> 24/7 support
-                </li>
-              </ul>
-              <a
-                href="#top"
-                class="mt-8 block rounded-xl border border-slate-600 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent"
-                >Talk to us</a
-              >
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="border-t border-slate-800/80 bg-slate-950">
-      <div
-        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-10 sm:flex-row sm:px-6"
-      >
-        <p class="text-sm text-slate-500">
-          © <span id="y"></span> RegulumAI. All rights reserved.
-        </p>
-        <div class="flex gap-6 text-sm text-slate-400">
-          <a href="#" class="hover:text-accent">Privacy</a>
-          <a href="#" class="hover:text-accent">Terms</a>
-          <a href="/dashboard" class="hover:text-accent">Dashboard</a>
-        </div>
-      </div>
-    </footer>
-    <script>
-      document.getElementById("y").textContent = new Date().getFullYear();
-    </script>
-  </body>
+        </footer>
+    </div>
+</body>
 </html>
