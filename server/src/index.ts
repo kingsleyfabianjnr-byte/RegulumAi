@@ -33,6 +33,12 @@ app.get("/dashboard", (_req, res) => {
   res.sendFile(dashboardPath);
 });
 
+// Marketing landing page (client/index.html)
+app.get("/create-rule", (_req, res) => {
+  const landingPath = path.join(__dirname, "..", "..", "client", "index.html");
+  res.sendFile(landingPath);
+});
+
 // Health check
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
