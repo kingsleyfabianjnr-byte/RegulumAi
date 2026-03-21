@@ -1,1 +1,448 @@
-RegulumAI_Landing_Page.html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RegulumAI — AI-powered compliance monitoring for modern regulatory teams."
+    />
+    <title>RegulumAI — Compliance OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              accent: "#00d9ff",
+            },
+            fontFamily: {
+              sans: ["ui-sans-serif", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-accent/30 selection:text-white"
+  >
+    <div
+      class="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(0,217,255,0.15),transparent)]"
+    ></div>
+    <div
+      class="fixed inset-0 -z-10 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900"
+    ></div>
+
+    <!-- Nav -->
+    <header
+      class="sticky top-0 z-50 border-b border-slate-800/70 bg-slate-950/80 backdrop-blur-xl"
+    >
+      <div
+        class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6"
+      >
+        <a href="#top" class="flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 shadow-[0_0_30px_rgba(0,217,255,0.35)]"
+          >
+            <span class="text-lg font-semibold text-accent">R</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold tracking-wide">RegulumAI</p>
+            <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+              Compliance OS
+            </p>
+          </div>
+        </a>
+        <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
+          <a href="#stats" class="transition hover:text-accent">Stats</a>
+          <a href="#features" class="transition hover:text-accent">Features</a>
+          <a href="#pricing" class="transition hover:text-accent">Pricing</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a
+            href="/dashboard"
+            class="hidden rounded-lg border border-slate-700 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-accent/50 hover:text-accent sm:inline-flex"
+            >Dashboard</a
+          >
+          <a
+            href="#pricing"
+            class="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(0,217,255,0.35)] transition hover:bg-cyan-300"
+            >Get started</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section
+        class="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24"
+      >
+        <div class="mx-auto max-w-3xl text-center">
+          <p
+            class="mb-4 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1 text-xs font-medium uppercase tracking-wider text-accent"
+          >
+            <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+            RegTech for regulated industries
+          </p>
+          <h1
+            class="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl"
+          >
+            Compliance monitoring,
+            <span class="bg-gradient-to-r from-accent to-cyan-300 bg-clip-text text-transparent"
+              >powered by AI</span
+            >
+          </h1>
+          <p
+            class="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-slate-400"
+          >
+            Surface regulatory change, automate evidence trails, and keep teams
+            aligned—without drowning in PDFs and spreadsheets.
+          </p>
+          <div
+            class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <a
+              href="#pricing"
+              class="inline-flex w-full items-center justify-center rounded-xl bg-accent px-8 py-3.5 text-base font-semibold text-slate-950 shadow-[0_0_32px_rgba(0,217,255,0.4)] transition hover:bg-cyan-300 sm:w-auto"
+              >Start free trial</a
+            >
+            <a
+              href="#features"
+              class="inline-flex w-full items-center justify-center rounded-xl border border-slate-600 bg-slate-900/50 px-8 py-3.5 text-base font-medium text-slate-200 backdrop-blur transition hover:border-accent/40 hover:text-accent sm:w-auto"
+              >See how it works</a
+            >
+          </div>
+        </div>
+
+        <!-- Hero visual -->
+        <div
+          class="relative mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/40 p-1 shadow-2xl shadow-accent/5"
+        >
+          <div
+            class="rounded-xl bg-gradient-to-br from-slate-900 to-slate-950 p-6 sm:p-10"
+          >
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-6">
+              <div class="flex items-center gap-3">
+                <div class="h-3 w-3 rounded-full bg-red-500/80"></div>
+                <div class="h-3 w-3 rounded-full bg-amber-500/80"></div>
+                <div class="h-3 w-3 rounded-full bg-emerald-500/80"></div>
+                <span class="ml-2 font-mono text-xs text-slate-500"
+                  >regulum.ai/compliance</span
+                >
+              </div>
+              <span
+                class="rounded-md bg-emerald-500/10 px-2 py-1 text-xs font-medium text-emerald-400"
+                >All systems operational</span
+              >
+            </div>
+            <div class="mt-6 grid gap-4 sm:grid-cols-3">
+              <div
+                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
+              >
+                <p class="text-xs uppercase tracking-wider text-slate-500">
+                  Monitored sources
+                </p>
+                <p class="mt-2 text-2xl font-semibold text-white">2,400+</p>
+              </div>
+              <div
+                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
+              >
+                <p class="text-xs uppercase tracking-wider text-slate-500">
+                  New signals (24h)
+                </p>
+                <p class="mt-2 text-2xl font-semibold text-accent">47</p>
+              </div>
+              <div
+                class="rounded-lg border border-slate-800 bg-slate-950/50 p-4"
+              >
+                <p class="text-xs uppercase tracking-wider text-slate-500">
+                  Avg. review time
+                </p>
+                <p class="mt-2 text-2xl font-semibold text-white">−62%</p>
+              </div>
+            </div>
+            <div
+              class="mt-4 rounded-lg border border-dashed border-slate-700/80 bg-slate-900/30 p-4 font-mono text-xs leading-relaxed text-slate-400"
+            >
+              <span class="text-accent">→</span> EU AI Act · Annex flagged ·
+              Policy draft ready for legal review
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section id="stats" class="border-y border-slate-800/80 bg-slate-900/30">
+        <div
+          class="mx-auto grid max-w-6xl grid-cols-2 gap-px border-slate-800/80 bg-slate-800/50 md:grid-cols-4"
+        >
+          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
+            <p class="text-3xl font-semibold text-white sm:text-4xl">99.9%</p>
+            <p class="mt-2 text-sm text-slate-400">Platform uptime</p>
+          </div>
+          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
+            <p class="text-3xl font-semibold text-accent sm:text-4xl">&lt;200ms</p>
+            <p class="mt-2 text-sm text-slate-400">API p95 latency</p>
+          </div>
+          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
+            <p class="text-3xl font-semibold text-white sm:text-4xl">50+</p>
+            <p class="mt-2 text-sm text-slate-400">Jurisdictions</p>
+          </div>
+          <div class="bg-slate-950/80 px-6 py-10 text-center sm:px-8">
+            <p class="text-3xl font-semibold text-white sm:text-4xl">4.9</p>
+            <p class="mt-2 text-sm text-slate-400">G2 satisfaction</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Everything your compliance program needs
+          </h2>
+          <p class="mt-4 text-slate-400">
+            From horizon scanning to audit-ready exports—one place for policy,
+            evidence, and accountability.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Regulatory radar</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Continuous monitoring of agencies, registers, and feeds—ranked by
+              relevance to your entity profile.
+            </p>
+          </article>
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Policy alignment</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Map obligations to internal controls; surface gaps before auditors
+              or regulators do.
+            </p>
+          </article>
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4-8-4s-8 1.79-8 4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Evidence vault</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Immutable trails, versioned documents, and export packages tailored
+              to SOC 2 and ISO workflows.
+            </p>
+          </article>
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Workflow automation</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Route attestations, reminders, and escalations with SLAs that match
+              your risk appetite.
+            </p>
+          </article>
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Role-based access</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Fine-grained permissions for legal, risk, engineering, and external
+              counsel—without shadow IT.
+            </p>
+          </article>
+          <article
+            class="group rounded-2xl border border-slate-800 bg-slate-900/40 p-6 transition hover:border-accent/30 hover:shadow-[0_0_40px_rgba(0,217,255,0.08)]"
+          >
+            <div
+              class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white">Developer-first API</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">
+              Webhooks, structured payloads, and sandbox keys so you can embed
+              compliance into your stack.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing" class="border-t border-slate-800/80 bg-slate-900/20">
+        <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <div class="mx-auto max-w-2xl text-center">
+            <h2 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Simple, transparent pricing
+            </h2>
+            <p class="mt-4 text-slate-400">
+              Start small, scale with your footprint. Annual billing saves 20%.
+            </p>
+          </div>
+          <div class="mt-14 grid gap-8 lg:grid-cols-3">
+            <div
+              class="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/50 p-8"
+            >
+              <h3 class="text-lg font-semibold text-white">Starter</h3>
+              <p class="mt-2 text-sm text-slate-400">
+                For teams validating AI-driven compliance workflows.
+              </p>
+              <p class="mt-6 flex items-baseline gap-1">
+                <span class="text-4xl font-semibold text-white">$99</span>
+                <span class="text-slate-500">/mo</span>
+              </p>
+              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Up to 3 users
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> 1 jurisdiction pack
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Weekly digest
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Email support
+                </li>
+              </ul>
+              <a
+                href="#top"
+                class="mt-8 block rounded-xl border border-slate-600 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent"
+                >Contact sales</a
+              >
+            </div>
+            <div
+              class="relative flex flex-col rounded-2xl border border-accent/40 bg-slate-900/60 p-8 shadow-[0_0_48px_rgba(0,217,255,0.12)]"
+            >
+              <span
+                class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs font-semibold text-slate-950"
+                >Most popular</span
+              >
+              <h3 class="text-lg font-semibold text-white">Growth</h3>
+              <p class="mt-2 text-sm text-slate-400">
+                For scaling programs across business units and regions.
+              </p>
+              <p class="mt-6 flex items-baseline gap-1">
+                <span class="text-4xl font-semibold text-white">$499</span>
+                <span class="text-slate-500">/mo</span>
+              </p>
+              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Up to 25 users
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> All jurisdiction packs
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Real-time alerts & API
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> SSO (SAML)
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Priority support
+                </li>
+              </ul>
+              <a
+                href="#top"
+                class="mt-8 block rounded-xl bg-accent py-3 text-center text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
+                >Start trial</a
+              >
+            </div>
+            <div
+              class="flex flex-col rounded-2xl border border-slate-800 bg-slate-950/50 p-8"
+            >
+              <h3 class="text-lg font-semibold text-white">Enterprise</h3>
+              <p class="mt-2 text-sm text-slate-400">
+                Global banks, insurers, and platforms with complex estates.
+              </p>
+              <p class="mt-6 flex items-baseline gap-1">
+                <span class="text-4xl font-semibold text-white">Custom</span>
+              </p>
+              <ul class="mt-8 flex-1 space-y-3 text-sm text-slate-300">
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Unlimited seats
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Dedicated CSM
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> VPC / on-prem options
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> Custom integrations
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-accent">✓</span> 24/7 support
+                </li>
+              </ul>
+              <a
+                href="#top"
+                class="mt-8 block rounded-xl border border-slate-600 py-3 text-center text-sm font-semibold text-slate-200 transition hover:border-accent/50 hover:text-accent"
+                >Talk to us</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-800/80 bg-slate-950">
+      <div
+        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-10 sm:flex-row sm:px-6"
+      >
+        <p class="text-sm text-slate-500">
+          © <span id="y"></span> RegulumAI. All rights reserved.
+        </p>
+        <div class="flex gap-6 text-sm text-slate-400">
+          <a href="#" class="hover:text-accent">Privacy</a>
+          <a href="#" class="hover:text-accent">Terms</a>
+          <a href="/dashboard" class="hover:text-accent">Dashboard</a>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
