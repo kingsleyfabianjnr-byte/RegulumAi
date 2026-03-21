@@ -1,79 +1,141 @@
 import { Router, Request, Response } from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { prisma } from "../lib/prisma";
+import type { Session } from "@supabase/supabase-js";
+import { getSupabase } from "../lib/supabase";
 
 const router = Router();
 
+function appendSessionCookies(res: Response, session: Session) {
+  const maxAge = session.expires_in ?? 60 * 60 * 24 * 7;
+  const secure = process.env.NODE_ENV === "production";
+  const base = `Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure ? "; Secure" : ""}`;
+  res.append(
+    "Set-Cookie",
+    `sb-access-token=${encodeURIComponent(session.access_token)}; ${base}`
+  );
+  res.append(
+    "Set-Cookie",
+    `sb-refresh-token=${encodeURIComponent(session.refresh_token)}; ${base}`
+  );
+}
+
+async function handleSignup(req: Request, res: Response) {
+  let supabase;
+  try {
+    supabase = getSupabase();
+  } catch {
+    res.status(503).json({ error: "Authentication service is not configured" });
+    return;
+  }
+
+  const body = req.body as {
+    email?: string;
+    password?: string;
+    companyName?: string;
+    name?: string;
+  };
+
+  const companyName = body.companyName?.trim() || body.name?.trim();
+  const { email, password } = body;
+
+  if (!email || !password || !companyName) {
+    res.status(400).json({
+      error: "Email, password, and company name are required",
+    });
+    return;
+  }
+
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { company_name: companyName },
+    },
+  });
+
+  if (error) {
+    res.status(400).json({ error: error.message });
+    return;
+  }
+
+  if (data.session) {
+    appendSessionCookies(res, data.session);
+    res.status(201).json({
+      ok: true,
+      user: data.user,
+      token: data.session.access_token,
+      redirect: "/dashboard",
+    });
+    return;
+  }
+
+  res.status(201).json({
+    ok: true,
+    user: data.user,
+    redirect: "/login",
+    message: "Check your email to confirm your account, then sign in.",
+  });
+}
+
+router.post("/signup", async (req: Request, res: Response) => {
+  try {
+    await handleSignup(req, res);
+  } catch (err) {
+    console.error("Signup error:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+/** @deprecated Next.js app compatibility — prefer POST /signup with `companyName` */
 router.post("/register", async (req: Request, res: Response) => {
   try {
-    const { email, password, name } = req.body;
-
-    if (!email || !password || !name) {
-      res.status(400).json({ error: "Email, password, and name are required" });
-      return;
-    }
-
-    const existing = await prisma.user.findUnique({ where: { email } });
-    if (existing) {
-      res.status(409).json({ error: "Email already registered" });
-      return;
-    }
-
-    const passwordHash = await bcrypt.hash(password, 12);
-
-    const user = await prisma.user.create({
-      data: { email, passwordHash, name },
-      select: { id: true, email: true, name: true, role: true },
-    });
-
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: "7d",
-    });
-
-    res.status(201).json({ user, token });
-  } catch (error) {
-    console.error("Registration error:", error);
+    await handleSignup(req, res);
+  } catch (err) {
+    console.error("Register error:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    let supabase;
+    try {
+      supabase = getSupabase();
+    } catch {
+      res.status(503).json({ error: "Authentication service is not configured" });
+      return;
+    }
+
+    const { email, password } = req.body as { email?: string; password?: string };
 
     if (!email || !password) {
       res.status(400).json({ error: "Email and password are required" });
       return;
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      res.status(401).json({ error: "Invalid credentials" });
-      return;
-    }
-
-    const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) {
-      res.status(401).json({ error: "Invalid credentials" });
-      return;
-    }
-
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-      expiresIn: "7d",
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
 
+    if (error) {
+      res.status(401).json({ error: error.message });
+      return;
+    }
+
+    if (!data.session) {
+      res.status(401).json({ error: "Invalid credentials" });
+      return;
+    }
+
+    appendSessionCookies(res, data.session);
     res.json({
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-      },
-      token,
+      ok: true,
+      redirect: "/dashboard",
+      token: data.session.access_token,
+      user: data.user,
     });
-  } catch (error) {
-    console.error("Login error:", error);
+  } catch (err) {
+    console.error("Login error:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });

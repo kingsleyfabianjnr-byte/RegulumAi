@@ -39,6 +39,16 @@ app.get("/create-rule", (_req, res) => {
   res.sendFile(landingPath);
 });
 
+const clientDir = path.join(__dirname, "..", "..", "client");
+
+app.get("/signup", (_req, res) => {
+  res.sendFile(path.join(clientDir, "signup.html"));
+});
+
+app.get("/login", (_req, res) => {
+  res.sendFile(path.join(clientDir, "login.html"));
+});
+
 // Health check
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });

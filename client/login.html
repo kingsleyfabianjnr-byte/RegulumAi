@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in — RegulumAI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { accent: "#00d9ff" },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="min-h-full bg-slate-950 text-slate-100 antialiased selection:bg-accent/30 selection:text-white"
+  >
+    <div
+      class="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
+    >
+      <header class="border-b border-slate-800/70 bg-slate-950/80 backdrop-blur-xl">
+        <div
+          class="mx-auto flex max-w-lg items-center justify-between gap-4 px-4 py-4 sm:px-6"
+        >
+          <a href="/create-rule" class="flex items-center gap-3">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 shadow-[0_0_30px_rgba(0,217,255,0.35)]"
+            >
+              <span class="text-lg font-semibold text-accent">R</span>
+            </div>
+            <div>
+              <p class="text-sm font-semibold tracking-wide">RegulumAI</p>
+              <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400">
+                Compliance OS
+              </p>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <main class="flex flex-1 items-center justify-center px-4 py-12 sm:px-6">
+        <div class="w-full max-w-md">
+          <h1 class="text-center text-2xl font-semibold tracking-tight text-white">
+            Sign in
+          </h1>
+          <p class="mt-2 text-center text-sm text-slate-400">
+            New here?
+            <a href="/signup" class="font-medium text-accent hover:text-cyan-300"
+              >Create an account</a
+            >
+          </p>
+
+          <div
+            class="mt-8 rounded-2xl border border-slate-800/80 bg-slate-900/40 p-8 shadow-[0_0_40px_rgba(0,0,0,0.35)] backdrop-blur-sm"
+          >
+            <p
+              id="form-error"
+              class="mb-4 hidden rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-300"
+              role="alert"
+            ></p>
+
+            <form id="login-form" class="space-y-5">
+              <div>
+                <label for="email" class="block text-sm font-medium text-slate-300"
+                  >Email</label
+                >
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  class="mt-1.5 w-full rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2.5 text-slate-100 placeholder:text-slate-500 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25"
+                  placeholder="you@company.com"
+                />
+              </div>
+              <div>
+                <label for="password" class="block text-sm font-medium text-slate-300"
+                  >Password</label
+                >
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  required
+                  class="mt-1.5 w-full rounded-lg border border-slate-700 bg-slate-950/80 px-3 py-2.5 text-slate-100 placeholder:text-slate-500 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/25"
+                  placeholder="••••••••"
+                />
+              </div>
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full rounded-xl bg-accent py-3 text-sm font-semibold text-slate-950 shadow-[0_0_24px_rgba(0,217,255,0.35)] transition hover:bg-cyan-300 disabled:opacity-50"
+              >
+                Sign In
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+      const form = document.getElementById("login-form");
+      const errEl = document.getElementById("form-error");
+      const btn = document.getElementById("submit-btn");
+
+      function showError(msg) {
+        errEl.textContent = msg;
+        errEl.classList.remove("hidden");
+      }
+      function hideError() {
+        errEl.classList.add("hidden");
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        hideError();
+        btn.disabled = true;
+        const fd = new FormData(form);
+        const body = {
+          email: fd.get("email")?.toString().trim(),
+          password: fd.get("password")?.toString() ?? "",
+        };
+        try {
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(body),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) {
+            showError(data.error || "Invalid credentials");
+            return;
+          }
+          window.location.href = data.redirect || "/dashboard";
+        } catch {
+          showError("Network error. Try again.");
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
